@@ -3,10 +3,9 @@ require('module-alias/register')
 const { multithread, runOnce } = require('node-multithread');
 import BaseStart, { BaseStartInterface } from './base/BaseStart';
 import bootstrap from './bootstrap';
-import { Web, Api, Socket, Redis, EventEmit } from '@root/routes/v1/index';
+import { Web, Api, Socket, Redis } from '@root/routes/v1/index';
 import { AppConfig } from './config';
 import { MasterDataInterface } from './bootstrap/StartMasterData';
-import middleware from './app/middleware';
 import SequelizeInitModel from '@root/sequelize/models';
 declare var masterData: MasterDataInterface
 
@@ -32,8 +31,7 @@ multithread(() => {
         Socket.create(global.app);
         // Redis.create(global.app);
         callback(null);
-      },
-      middleware],
+      }],
     run: async function () {
       /* Server is ready! */
       /* You can create some programatic code here */
