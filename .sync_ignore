@@ -1,0 +1,7 @@
+.sync_ignore 
+sync-config.json
+#dist/
+node_modules/
+.git/
+package-lock.json
+yarn.lock

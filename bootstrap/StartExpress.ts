@@ -1,0 +1,36 @@
+import { AppConfig } from "@root/config";
+import { Express} from "../tool";
+import Http from 'http';
+var cors = require('cors')
+var multer = require('multer');
+var upload = multer();
+var BodyParser = require("body-parser");
+
+export default function(next : Function){
+  try{
+    console.log('Bootstrap -> Start Express');
+    const app = Express;
+    app.use(cors());
+    /* Request Type  */
+    /* application/json */
+    app.use(BodyParser.json());
+    /* application-x-www-form-urlencoded */
+    app.use(BodyParser.urlencoded({
+      extended: true
+    }));
+    /* Multipart/form-data */
+    app.use(upload.any());
+    global.app = app;
+    /* Note / Catatan */
+    /* Perbedaan antara  global.Server.listen dan global.app.Listen
+     - global.Server.listen -> Ini bisa di integrasikan dengan modul lain seperti socket io
+     - global.app.listen -> Ini hanya untuk express saja */
+    global.Server = Http.createServer(app);
+    global.Server.listen(AppConfig.PORT, () => {
+      console.log(`Example app listening}`)
+    });
+    return next(null);
+  }catch(ex){
+    throw ex;
+  }
+}
