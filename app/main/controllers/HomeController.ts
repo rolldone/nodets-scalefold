@@ -7,7 +7,7 @@ interface HomeControllerInterface extends BaseControllerInterface {
 
 const HomeController : HomeControllerInterface = BaseController.extend(<HomeControllerInterface>{
   async index(req : express.Request, res : express.Response){
-    res.send('Welcome to Mas Adapter service! '+global.node_identity);
+    res.send('Welcome to nodets scalefold! '+global.node_identity);
   }
 });
 
